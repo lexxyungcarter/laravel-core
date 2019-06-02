@@ -1,0 +1,136 @@
+<?php
+
+namespace AceLords\Core\Library;
+
+
+class Datatable
+{
+    protected $headers = [];
+
+    /*
+     | To make the headers more easier and accommodating to several styles, I have made them accept
+     | uni and multi-dimensional arrays (to level 1). In cases where a value is hidden inside
+     | a relationship e.g. props.item.patient.full_name, you can specify the 'value' as 'patient.full_name'
+     | and the search will just work!
+     |
+     | Here is a sample header member
+     |
+     | protected $headers = [
+     |        ['text' => "patient Name", 'value' => 'patient.full_name'],
+     |        ['text' => "Admission Type", 'sortable' => false, 'value' => 'admission type'],
+     |        "Authorized Amount", "Date", "actions"
+     |   ];
+     |
+     | or even
+     |  'name', ['text' => 'amount', 'align' => 'right'], 'type', ['text' => 'used?', 'value' => 'used'], 'actions'
+     |
+     |
+     */
+
+    /**
+     * @param $headers
+     *
+     * @return array
+     */
+
+    /*
+     * Prepare the headers. The headers are very friendly to set, and here at the top is sample code
+     */
+    public function headers($headers)
+    {
+        foreach($headers as $header)
+        {
+            array_push($this->headers, [
+                'text' => $this->getText($header),
+                'sortable' => $this->getSortable($header),
+                'value' => $this->getValue($header),
+                'align' => $this->getAlignment($header),
+            ]);
+        }
+
+        return $this->headers;
+    }
+
+    /**
+     * get the text for the datatable. This is the display
+     *
+     * @param $header
+     *
+     * @return string
+     */
+    private function getText($header)
+    {
+        $value = $header;
+
+        if(is_array($header) and isset($header['text'])) {
+            $value = $header['text'];
+        }
+
+        return is_array($value) ? ucwords($value[1]) : ucwords($value);
+    }
+
+    /**
+     * get the value. This value is used in searching the vuetify datatable when no ajax search is required
+     *
+     * @param $header
+     *
+     * @return string
+     */
+    private function getValue($header)
+    {
+        $value = $header;
+
+        if(is_array($header) and isset($header['value'])) {
+            $value = $header['value'];
+        }
+
+        return is_array($value) ? snake_case(strtolower(collect($value)->first())) : snake_case(strtolower($value));
+    }
+
+    /**
+     * get the sortable attribute
+     *
+     * @param $header
+     *
+     * @return bool|mixed
+     */
+    private function getSortable($header)
+    {
+        $value = true;
+
+        if(is_array($header) and isset($header['sortable'])) {
+
+            $value = $header['sortable'];
+
+        } else if(!is_array($header) and str_contains($header, 'action')) {
+            // check if string is action
+            $value = false;
+        }
+
+        return $value;
+    }
+
+    private function getAlignment($header)
+    {
+        $value = 'left';
+
+        if(is_array($header) and isset($header['align'])) {
+            $value = $header['align'];
+        }
+
+        return $value;
+    }
+
+    /**
+     * function to get the value for a certain index.
+     *
+     * @param $header
+     * @param int $index
+     *
+     * @return mixed
+     */
+    private function getValueFromIndex($header, $index = 0)
+    {
+        return isset(array_keys($header)[$index]) ? $header[array_keys($header)[$index]] : $header[array_keys($header)[0]];
+    }
+}
