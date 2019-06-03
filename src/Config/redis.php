@@ -1,10 +1,19 @@
 <?php
 
+
+$keys = [];
+
 $redisExtras = [
     'domains', 'organisations', 'themes', 'configurations',
 ];
 
-$autoloadedExtras = config('acelords_redis_autoload.extras') ?? [];
+$models = [
+    //
+];
+
+$redisExtras = [
+    
+];
 
 return [
     /*
@@ -24,11 +33,11 @@ return [
      */
     'prefix' => 'settings',
 
-    'keys' => config('acelords_redis_autoload.keys'),
+    'keys' => $keys,
 
-    'extras' => array_merge($redisExtras, $autoloadedExtras),
+    'extras' => $redisExtras,
 
-    'models' => config('acelords_redis_autoload.models'),
+    'models' => $models,
 
     /*
     * Attached to redis in order to identify and distinguish the application

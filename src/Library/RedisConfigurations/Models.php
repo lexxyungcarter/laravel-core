@@ -12,7 +12,7 @@ class Models extends RedisTemplate implements RedisInterface
      */
     public function setKeys()
     {
-        $this->keys = config('acelords_redis_autoload.models');
+        $this->keys = config('acelords_redis.models');
     }
 
     /*

@@ -49,7 +49,7 @@ class RedisServiceProvider extends ServiceProvider
     {
         $select = new Extras();
 
-        foreach(config('acelords_redis_autoload.extras') as $key)
+        foreach(config('acelords_redis.extras') as $key)
         {
             if(! $redis->exists($key))
                 $redis->store($select, $key);
@@ -63,7 +63,7 @@ class RedisServiceProvider extends ServiceProvider
     {
         $select = new Models();
 
-        foreach(config('acelords_redis_autoload.models') as $key)
+        foreach(config('acelords_redis.models') as $key)
         {
             if(class_exists($key))
             {

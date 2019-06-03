@@ -37,7 +37,7 @@ class Sidebar extends RedisTemplate implements RedisInterface
     {
         $data  = collect();
 
-        $sidebarConfig = config("acelords_sidebar_autoload.general");
+        $sidebarConfig = config("acelords_sidebar.general");
 
         if($sidebarConfig)
         {
@@ -59,7 +59,7 @@ class Sidebar extends RedisTemplate implements RedisInterface
     {
         $data  = collect();
 
-        $sidebarConfig = config("acelords_sidebar_autoload.sudo");
+        $sidebarConfig = config("acelords_sidebar.sudo");
 
         if($sidebarConfig)
         {

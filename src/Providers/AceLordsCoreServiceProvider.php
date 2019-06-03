@@ -26,7 +26,7 @@ class AceLordsCoreServiceProvider extends ServiceProvider
 
         // $this->registerMiddlewares($kernel);
         // $this->registerTranslations();
-        // $this->registerConfig();
+        $this->registerConfig();
         // $this->registerViews();
         // $this->registerFactories();
         // $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
@@ -53,6 +53,26 @@ class AceLordsCoreServiceProvider extends ServiceProvider
                 require $file;
             }
         }
+    }
+
+    /**
+     * publish config
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->publishes([
+            __DIR__ . './../Config/redis.php' => config_path('acelords_redis.php'),
+        ], 'acelords_redis');
+        
+        $this->publishes([
+            __DIR__ . './../Config/sidebar.php' => config_path('acelords_sidebar.php'),
+        ], 'acelords_sidebar');
+        
+        $this->publishes([
+            __DIR__ . './../Config/logging.php' => config_path('acelords_logging.php'),
+        ], 'acelords_logging');
     }
 
     /**
