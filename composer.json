@@ -38,7 +38,5 @@
             "name": "AceLords System Engineers",
             "email": "info@acelords.space"
         }
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    ]
 }
