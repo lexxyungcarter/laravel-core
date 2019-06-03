@@ -2,6 +2,8 @@
     "name": "acelords/core",
     "description": "The core system for AceLords Products",
     "type": "library",
+    "version": "1.0.2",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.2",
         "laravel/framework": "^5.6",
