@@ -63,15 +63,15 @@ class AceLordsCoreServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__ . './../Config/redis.php' => config_path('acelords_redis.php'),
+            __DIR__ . '/../Config/redis.php' => config_path('acelords_redis.php'),
         ], 'acelords_redis');
         
         $this->publishes([
-            __DIR__ . './../Config/sidebar.php' => config_path('acelords_sidebar.php'),
+            __DIR__ . '/../Config/sidebar.php' => config_path('acelords_sidebar.php'),
         ], 'acelords_sidebar');
         
         $this->publishes([
-            __DIR__ . './../Config/logging.php' => config_path('acelords_logging.php'),
+            __DIR__ . '/../Config/logging.php' => config_path('acelords_logging.php'),
         ], 'acelords_logging');
     }
 
@@ -83,15 +83,15 @@ class AceLordsCoreServiceProvider extends ServiceProvider
     protected function registerMergeConfig()
     {
         $this->mergeConfigFrom(
-            __DIR__.'./../Config/core.php', 'acelords_core'
+            __DIR__.'/../Config/core.php', 'acelords_core'
         );
         
         $this->mergeConfigFrom(
-            __DIR__.'./../Config/redis.php', 'acelords_redis'
+            __DIR__.'/../Config/redis.php', 'acelords_redis'
         );
 
         $this->mergeConfigFrom(
-            __DIR__.'./../Config/logging.php', 'acelords_logging'
+            __DIR__.'/../Config/logging.php', 'acelords_logging'
         );
     }
 
