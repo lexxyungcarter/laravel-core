@@ -23,8 +23,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AceLords\\Core\\AceLordsCoreServiceProvider",
-                "AceLords\\Core\\RedisServiceProvider"
+                "AceLords\\Core\\Providers\\AceLordsCoreServiceProvider",
+                "AceLords\\Core\\Providers\\RedisServiceProvider"
             ]
         }
     },
