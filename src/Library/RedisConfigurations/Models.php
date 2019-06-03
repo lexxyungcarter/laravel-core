@@ -2,7 +2,7 @@
 
 namespace AceLords\Core\Library\RedisConfigurations;
 
-use AceLords\Yuvo\Library\Contracts\RedisInterface;
+use AceLords\Core\Library\Contracts\RedisInterface;
 
 class Models extends RedisTemplate implements RedisInterface
 {

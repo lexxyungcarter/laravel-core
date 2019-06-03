@@ -3,7 +3,7 @@
 namespace AceLords\Core\Library\RedisConfigurations;
 
 use Illuminate\Support\Facades\DB;
-use AceLords\Yuvo\Library\Contracts\RedisInterface;
+use AceLords\Core\Library\Contracts\RedisInterface;
 
 class Extras extends RedisTemplate implements RedisInterface
 {

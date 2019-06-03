@@ -2,7 +2,7 @@
 
 namespace AceLords\Core\Library\RedisConfigurations;
 
-use AceLords\Yuvo\Library\Contracts\RedisInterface;
+use AceLords\Core\Library\Contracts\RedisInterface;
 
 class Sidebar extends RedisTemplate implements RedisInterface
 {
