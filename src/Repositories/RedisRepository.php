@@ -11,7 +11,7 @@
 namespace AceLords\Core\Repositories;
 
 use Illuminate\Support\Facades\Redis;
-use AceLords\Yuvo\Library\Contracts\RedisInterface;
+use AceLords\Core\Library\Contracts\RedisInterface;
 
 class RedisRepository
 {
