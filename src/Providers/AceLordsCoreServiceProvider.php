@@ -103,6 +103,7 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         $this->commands([
             \AceLords\Core\Commands\GenerateProductKey::class,
             \AceLords\Core\Commands\TestQueue::class,
+            \AceLords\Core\Commands\FixRoles::class,
         ]);
     }
 
