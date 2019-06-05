@@ -104,10 +104,11 @@ if(! function_exists("eclair"))
         if($toW3cString)
             return Carbon::parse($date)->toW3cString();
 
-        $location = geoip()->getLocation()['timezone'];
+        // $location = geoip()->getLocation()['timezone'];
 
         if($time) {
-            return Carbon::parse($date)->setTimezone($location)->format("M d, Y h:i:s a");
+            // return Carbon::parse($date)->setTimezone($location)->format("M d, Y h:i:s a");
+            return Carbon::parse($date)->format("M d, Y h:i:s a");
         }
 
         return Carbon::parse($date)->format("M d, Y");
