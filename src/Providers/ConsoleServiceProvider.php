@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use AceLords\Core\Commands\GenerateProductKey;
 use AceLords\Core\Commands\TestQueue;
 use AceLords\Core\Commands\FixRoles;
+use AceLords\Core\Commands\AssetsCommand;
 
 // generators
 use AceLords\Core\Commands\Generators\CommandMakeCommand;
@@ -39,6 +40,7 @@ class ConsoleServiceProvider extends ServiceProvider
         GenerateProductKey::class,
         TestQueue::class,
         FixRoles::class,
+        AssetsCommand::class,
     ];
 
     /**
