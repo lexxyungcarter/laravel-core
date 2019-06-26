@@ -4,30 +4,25 @@ namespace AceLords\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use AceLords\Core\Commands\GenerateProductKey;
-use AceLords\Core\Commands\TestQueue;
-use AceLords\Core\Commands\FixRoles;
-use AceLords\Core\Commands\AssetsCommand;
+use AceLords\Core\Console\GenerateProductKey;
+use AceLords\Core\Console\TestQueue;
+use AceLords\Core\Console\FixRoles;
+use AceLords\Core\Console\AssetsCommand;
 
 // generators
-use AceLords\Core\Commands\Generators\CommandMakeCommand;
-use AceLords\Core\Commands\Generators\ControllerMakeCommand;
-use AceLords\Core\Commands\Generators\EventMakeCommand;
-use AceLords\Core\Commands\Generators\FactoryMakeCommand;
-use AceLords\Core\Commands\Generators\JobMakeCommand;
-use AceLords\Core\Commands\Generators\ListenerMakeCommand;
-use AceLords\Core\Commands\Generators\MailMakeCommand;
-use AceLords\Core\Commands\Generators\MiddlewareMakeCommand;
-use AceLords\Core\Commands\Generators\ModelMakeCommand;
-use AceLords\Core\Commands\Generators\NotificationMakeCommand;
-use AceLords\Core\Commands\Generators\PolicyMakeCommand;
-use AceLords\Core\Commands\Generators\ProviderMakeCommand;
-use AceLords\Core\Commands\Generators\RequestMakeCommand;
-use AceLords\Core\Commands\Generators\ResourceMakeCommand;
-use AceLords\Core\Commands\Generators\RouteProviderMakeCommand;
-use AceLords\Core\Commands\Generators\RuleMakeCommand;
-use AceLords\Core\Commands\Generators\SeedCommand;
-use AceLords\Core\Commands\Generators\SeedMakeCommand;
+use AceLords\Core\Console\Generators\ChannelMakeCommand;
+use AceLords\Core\Console\Generators\ConsoleMakeCommand;
+use AceLords\Core\Console\Generators\EventMakeCommand;
+use AceLords\Core\Console\Generators\JobMakeCommand;
+use AceLords\Core\Console\Generators\ListenerMakeCommand;
+use AceLords\Core\Console\Generators\MailMakeCommand;
+use AceLords\Core\Console\Generators\ModelMakeCommand;
+use AceLords\Core\Console\Generators\NotificationMakeCommand;
+use AceLords\Core\Console\Generators\PolicyMakeCommand;
+use AceLords\Core\Console\Generators\ProviderMakeCommand;
+use AceLords\Core\Console\Generators\RequestMakeCommand;
+use AceLords\Core\Console\Generators\ResourceMakeCommand;
+use AceLords\Core\Console\Generators\RuleMakeCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -49,24 +44,19 @@ class ConsoleServiceProvider extends ServiceProvider
      * @var array
      */
     protected $generators = [
-        CommandMakeCommand::class,
-        ControllerMakeCommand::class,
+        ConsoleMakeCommand::class,
+        ChannelMakeCommand::class,
         EventMakeCommand::class,
-        FactoryMakeCommand::class,
         JobMakeCommand::class,
         ListenerMakeCommand::class,
         MailMakeCommand::class,
-        MiddlewareMakeCommand::class,
         ModelMakeCommand::class,
         NotificationMakeCommand::class,
-        ProviderMakeCommand::class,
-        RouteProviderMakeCommand::class,
         PolicyMakeCommand::class,
+        ProviderMakeCommand::class,
         RequestMakeCommand::class,
         ResourceMakeCommand::class,
         RuleMakeCommand::class,
-        SeedCommand::class,
-        SeedMakeCommand::class,
     ];
 
 
@@ -78,6 +68,7 @@ class ConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands($this->commands);
+        $this->commands($this->generators);
     }
 
     /**
