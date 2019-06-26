@@ -4,6 +4,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Namespace
+    |--------------------------------------------------------------------------
+    |
+    | This option specifies the core namespace
+    |
+    |
+    */
+    'namespace' => 'AceLords',
+
+    /*
+    |--------------------------------------------------------------------------
     | Basic Site Configuration
     |--------------------------------------------------------------------------
     |
@@ -20,7 +31,7 @@ return [
         'product_key' => env('APP_PRODUCT_KEY', 'XXMKSNCHEAPMULTINIIUEOWMNSAONBOAWQOXX'),
         'product_key_length' => 28,
         'version' => env('APP_PRODUCT_VERSION', '4.0'),
-        'codename' => 'AceYuvo',
+        'codename' => env('APP_PRODUCT_CODENAME', 'AceLords WebApp'),
     ],
 
     /*
@@ -61,9 +72,13 @@ return [
     |
     */
     'backendtheme' => [
-        'admin' => env('ACELORDS_BACKENDTHEME_ADMIN', 'vuetify'),
-        'client' => env('ACELORDS_BACKENDTHEME_CLIENT', 'vuetify'),
+        'admin' => env('ACELORDS_BACKENDTHEME_ADMIN', 'snowflake'),
+        'client' => env('ACELORDS_BACKENDTHEME_CLIENT', 'snowflake'),
         'others' => env('ACELORDS_BACKENDTHEME_OTHERS', 'null'),
+    ],
+
+    'spa' => [
+        'dashboard' => env('ACELORDS_BACKENDTHEME_ADMIN', 'vuetify') . '.layouts.main'
     ],
 
 ];

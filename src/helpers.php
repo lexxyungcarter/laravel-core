@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use AceLords\Core\Repositories\RedisRepository;
+use Illuminate\Support\Facades\Artisan;
 
 if (! function_exists('adjustBrightness'))
 {
@@ -104,10 +105,7 @@ if(! function_exists("eclair"))
         if($toW3cString)
             return Carbon::parse($date)->toW3cString();
 
-        // $location = geoip()->getLocation()['timezone'];
-
         if($time) {
-            // return Carbon::parse($date)->setTimezone($location)->format("M d, Y h:i:s a");
             return Carbon::parse($date)->format("M d, Y h:i:s a");
         }
 
@@ -278,3 +276,58 @@ if (!function_exists('is_countable')) {
     }
 }
 
+if (!function_exists('filenameSanitizer')) {
+    
+    /** 
+    * filename sanitizer
+    *
+    * @var mixed Request
+    */
+    function filenameSanitizer($str) {
+        $nicename = str_replace(' ', '-', strtolower($str));
+        // Remove anything which isn't a word, whitespace, number,
+        // or any of the following characters -_~,;[]().
+        // if you don't need to handle multi-byte characters
+        // you can use preg_replace rather than mb_ereg_replace
+        $nicename = preg_replace('([^\w\s\d\-_~,;\[\]\(\).])', '', $nicename);
+        // remove any runs of periods
+        $nicename = preg_replace('([\.]{2,})', '', $nicename);
+
+        return $nicename;
+    }
+}
+
+
+
+if(! function_exists('command_exists'))
+{
+    /**
+     * Check if an artisan command exists
+     *
+     * @param $name
+     *
+     * @return bool
+     */
+    function command_exists($name)
+    {
+        return array_has(Artisan::all(), $name);
+    }
+}
+
+
+if (!function_exists('setting'))
+{
+    /**
+     * Retrieve a setting configuration value.
+     * no need in prefixing the module's name since they are unique
+     *
+     * @param $setting
+     * @param string|null $default
+     *
+     * @return mixed
+     */
+    function setting($setting, $default = null)
+    {
+        return redis()->get('configurations')->where('name', $setting)->first()->value ?? $default;
+    }
+}

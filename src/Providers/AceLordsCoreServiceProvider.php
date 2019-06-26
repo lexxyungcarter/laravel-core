@@ -46,8 +46,6 @@ class AceLordsCoreServiceProvider extends ServiceProvider
     {
         $this->registerMergeConfig();
         
-        $this->registerCommands(); 
-        
         if (app()->environment('local')) {
             if (file_exists($file = __DIR__ . '/../helpers.php')) { 
                 require $file;
@@ -73,6 +71,11 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Config/logging.php' => config_path('acelords_logging.php'),
         ], 'acelords_logging');
+        
+        
+        $this->publishes([
+            __DIR__ . '/../Config/generator.php' => config_path('acelords_generator.php'),
+        ], 'acelords_generator');
     }
 
     /**
@@ -93,18 +96,10 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../Config/logging.php', 'acelords_logging'
         );
-    }
-
-    /**
-     * register app commands
-     */
-    public function registerCommands()
-    {
-        $this->commands([
-            \AceLords\Core\Commands\GenerateProductKey::class,
-            \AceLords\Core\Commands\TestQueue::class,
-            \AceLords\Core\Commands\FixRoles::class,
-        ]);
+        
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/generator.php', 'acelords_generator'
+        );
     }
 
     /**

@@ -120,16 +120,11 @@ class SiteConstants
     {
         $configurations = $this->repo->get('configurations');
 
-        if($configurations)
-        {
-            $this->data->put('title_separator', $configurations->where('name', 'title_separator')->first()->value);
-            $this->data->put('site_version', $configurations->where('name', 'site_version')->first()->value);
-            $this->data->put('site_codename', $configurations->where('name', 'site_codename')->first()->value);
-            $this->data->put('product_name', $configurations->where('name', 'product_name')->first()->value);
-            $this->data->put('system_updates_endpoint', $configurations->where('name', 'system_updates_endpoint')->first()->value);
-        }
-        
-        $this->data->put('footer_links', $this->repo->get('extra_pages'));
+        $this->data->put('title_separator', $configurations->firstWhere('name', 'title_separator')->value ?? '-');
+        $this->data->put('site_version', $configurations->firstWhere('name', 'site_version')->value ?? '-');
+        $this->data->put('site_codename', $configurations->firstWhere('name', 'site_codename')->value ?? '-');
+        $this->data->put('product_name', $configurations->firstWhere('name', 'product_name')->value ?? '-');
+        $this->data->put('system_updates_endpoint', $configurations->firstWhere('name', 'system_updates_endpoint')->value ?? '-');
     }
 
     /**

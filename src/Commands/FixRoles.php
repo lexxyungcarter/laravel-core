@@ -1,6 +1,6 @@
 <?php
 
-namespace AceLords\Core\Commands\Fixes;
+namespace AceLords\Core\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;

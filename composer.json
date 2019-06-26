@@ -5,6 +5,7 @@
     "version": "1.0.4",
     "require": {
         "php": ">=7.2",
+        "gladcodes/keygen": "^1.1",
         "laravel/framework": "^5.6",
         "predis/predis": "^1.1"
     },
@@ -25,6 +26,7 @@
         "laravel": {
             "providers": [
                 "AceLords\\Core\\Providers\\AceLordsCoreServiceProvider",
+                "AceLords\\Core\\Providers\\ConsoleServiceProvider",
                 "AceLords\\Core\\Providers\\RedisServiceProvider"
             ]
         }
@@ -33,11 +35,15 @@
     "authors": [
         {
             "name": "Lexx YungCarter",
-            "email": "spencermainaa@gmail.com"
+            "email": "spencermainaa@gmail.com",
+            "homepage": "https://github.com/lexxyungcarter",
+            "role": "Founder"
         },
         {
             "name": "AceLords System Engineers",
-            "email": "info@acelords.space"
+            "email": "info@acelords.space",
+            "homepage": "https://acelords.space",
+            "role": "Collaborators"
         }
     ],
     "minimum-stability": "dev",
