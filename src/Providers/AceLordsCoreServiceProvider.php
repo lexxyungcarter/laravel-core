@@ -27,12 +27,13 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         // $this->registerMiddlewares($kernel);
         // $this->registerTranslations();
         $this->registerConfig();
-        // $this->registerViews();
+        $this->registerViews();
         // $this->registerFactories();
         // $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->registerLogChannels();
 
         $this->loadMacros();
+        $this->defineAssetPublishing();
 
         $this->performQueryLog();
     }
@@ -50,6 +51,10 @@ class AceLordsCoreServiceProvider extends ServiceProvider
             if (file_exists($file = __DIR__ . '/../helpers.php')) { 
                 require $file;
             }
+        }
+
+        if (! defined('ACELORDS_CORE_PATH')) {
+            define('ACELORDS_CORE_PATH', realpath(__DIR__.'/../../'));
         }
     }
 
@@ -100,6 +105,32 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../Config/generator.php', 'acelords_generator'
         );
+    }
+
+    /**
+     * Register views.
+     *
+     * @return void
+     */
+    public function registerViews()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'acelordscore');
+
+        // $this->publishes([
+        //     __DIR__ . '/../Resources/views' => resource_path('views/vendor/acelords/core'),
+        // ]);
+    }
+
+    /**
+     * Define the asset publishing configuration.
+     *
+     * @return void
+     */
+    public function defineAssetPublishing()
+    {
+        $this->publishes([
+            ACELORDS_CORE_PATH . '/public' => public_path('vendor/acelords/core'),
+        ], 'acelords-core-assets');
     }
 
     /**
