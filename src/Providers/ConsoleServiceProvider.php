@@ -8,6 +8,7 @@ use AceLords\Core\Console\GenerateProductKey;
 use AceLords\Core\Console\TestQueue;
 use AceLords\Core\Console\FixRoles;
 use AceLords\Core\Console\AssetsCommand;
+use AceLords\Core\Console\UpdateRedisKey;
 
 // generators
 use AceLords\Core\Console\Generators\ChannelMakeCommand;
@@ -36,6 +37,7 @@ class ConsoleServiceProvider extends ServiceProvider
         TestQueue::class,
         FixRoles::class,
         AssetsCommand::class,
+        UpdateRedisKey::class,
     ];
 
     /**
