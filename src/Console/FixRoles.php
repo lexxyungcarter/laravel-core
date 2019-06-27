@@ -19,7 +19,7 @@ class FixRoles extends Command
      *
      * @var string
      */
-    protected $description = 'Fix roles after migrating from zizaco to entrust';
+    protected $description = 'Fix roles after migrating to or changing entrust config';
 
     /**
      * Create a new command instance.
