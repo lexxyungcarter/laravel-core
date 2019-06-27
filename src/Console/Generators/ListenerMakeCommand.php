@@ -19,7 +19,7 @@ class ListenerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new event AceLords project listener class';
+    protected $description = 'Create a new AceLords project event listener class';
 
     /**
      * The type of class being generated.
