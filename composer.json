@@ -27,7 +27,8 @@
             "providers": [
                 "AceLords\\Core\\Providers\\AceLordsCoreServiceProvider",
                 "AceLords\\Core\\Providers\\ConsoleServiceProvider",
-                "AceLords\\Core\\Providers\\RedisServiceProvider"
+                "AceLords\\Core\\Providers\\RedisServiceProvider",
+                "AceLords\\Core\\Providers\\ComposerServiceProvider"
             ]
         }
     },

@@ -7,6 +7,7 @@ use AceLords\Core\Repositories\RedisRepository;
 use AceLords\Core\Library\RedisConfigurations\Extras;
 use AceLords\Core\Library\RedisConfigurations\Models;
 use AceLords\Core\Library\RedisConfigurations\Sidebar;
+use AceLords\Core\Library\RedisConfigurations\Settings;
 
 class RedisServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,8 @@ class RedisServiceProvider extends ServiceProvider
         $this->setRedisModels($redis);
 
         $this->registerSidebar($redis);
+
+        $this->registerSettings($redis);
 
     }
 
@@ -89,6 +92,25 @@ class RedisServiceProvider extends ServiceProvider
 
         if(! $redis->exists('sudo_sidebar'))
             $redis->store($sidebar, 'sudo_sidebar');
+    }
+
+    /*
+     * Register the general system settings.
+     * Exist in modules config/settings
+     */
+    public function registerSettings($redis)
+    {
+        $settings = new Settings();
+        
+        if(! $redis->exists('settings'))
+        {
+            $redis->store($settings, 'settings');
+        }
+        
+        if(!$redis->exists('configurations'))
+        {
+            $redis->store($settings, 'configurations');
+        }
     }
 
     /**

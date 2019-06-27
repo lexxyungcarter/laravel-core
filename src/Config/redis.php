@@ -39,4 +39,13 @@ return [
     * Attached to redis in order to identify and distinguish the application
     */
     'application_prefix' => env('REDIS_PREFIX', 'acelords_webapps_'),
+
+    /**
+     * Specify Configuration Model to use.
+     * Replace with AceLords Project Namespace
+     */
+    'models' => [
+        'configuration' => 'AceLords\Website\Models\Configuration',
+    ],
+
 ];

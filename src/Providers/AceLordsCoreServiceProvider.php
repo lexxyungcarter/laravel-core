@@ -18,12 +18,6 @@ class AceLordsCoreServiceProvider extends ServiceProvider
      */
     public function boot(Kernel $kernel)
     {
-        // set up site constants, eg theme
-        new SiteConstants(); // this will set the theme automatically
-
-        // share data to views
-        // view()->share($siteConstants->data());
-
         // $this->registerMiddlewares($kernel);
         // $this->registerTranslations();
         $this->registerConfig();
@@ -35,7 +29,7 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         $this->loadMacros();
         $this->defineAssetPublishing();
 
-        $this->performQueryLog();
+        $this->performAfterKernelFunctions();
     }
 
     /**
@@ -161,27 +155,37 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * perform functions after the kernel is handled
+     */
+    public function performAfterKernelFunctions()
+    {
+        if (class_exists(RequestHandled::class)) {
+            Event::listen(RequestHandled::class, function(RequestHandled $event) {
+                // set up site constants, eg theme
+                new SiteConstants(); // this will set the theme automatically
+
+                $this->performQueryLog();
+
+            });
+        } 
+        else {
+            Event::listen('kernel.handled', function($request, $response) {
+
+                $this->performQueryLog();
+
+            });
+        }
+    }
+
+    /**
+     * perform query log on DB actions
+     */
     public function performQueryLog()
     {
-        if(env("QUERY_LOG"))
-        {
-            DB::enableQueryLog();
-    
-            if (class_exists(RequestHandled::class)) {
-                Event::listen(RequestHandled::class, function(RequestHandled $event) {
-                    if(request()->has('query-log'))
-                    {
-                        dd(DB::getQueryLog());
-                    }
-                });
-            } 
-            else {
-                Event::listen('kernel.handled', function($request, $response) {
-                    if($request->has('query-log'))
-                    {
-                        dd(DB::getQueryLog());
-                    }
-                });
+        if(env("QUERY_LOG")) {
+            if(request()->has('query-log')) {
+                dd(DB::getQueryLog());
             }
         }
     }
