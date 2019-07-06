@@ -107,7 +107,10 @@ class ProjectMakeCommand extends Command
         
         foreach($projectCommands as $comm) {
             $this->line("Running " . $comm . " command");
-            $this->call($comm);
+            $commExp = explode(' ', $comm);
+            $this->call($commExp[0], [
+                'name' => $commExp[1], 
+                'project' => $commExp[2]]);
         }
 
         $this->info('Done creating a project');
