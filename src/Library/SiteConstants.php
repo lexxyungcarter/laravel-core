@@ -120,6 +120,9 @@ class SiteConstants
     {
         $configurations = $this->repo->get('configurations');
 
+        if(! $configurations)
+            $configurations = collect();
+
         $this->data->put('title_separator', $configurations->firstWhere('name', 'title_separator')->value ?? '-');
         $this->data->put('site_version', $configurations->firstWhere('name', 'site_version')->value ?? '-');
         $this->data->put('site_codename', $configurations->firstWhere('name', 'site_codename')->value ?? '-');
