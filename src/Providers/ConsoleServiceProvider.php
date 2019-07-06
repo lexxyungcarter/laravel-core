@@ -24,6 +24,7 @@ use AceLords\Core\Console\Generators\ProviderMakeCommand;
 use AceLords\Core\Console\Generators\RequestMakeCommand;
 use AceLords\Core\Console\Generators\ResourceMakeCommand;
 use AceLords\Core\Console\Generators\RuleMakeCommand;
+use AceLords\Core\Console\Generators\ProjectMakeCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -59,6 +60,7 @@ class ConsoleServiceProvider extends ServiceProvider
         RequestMakeCommand::class,
         ResourceMakeCommand::class,
         RuleMakeCommand::class,
+        ProjectMakeCommand::class,
     ];
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AceLords\Core\Console;
+namespace AceLords\Core\Console\Generators;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
