@@ -1,0 +1,87 @@
+{
+    "name": "acelords/project",
+    "description": "AceLords Project",
+    "type": "library",
+    "keywords": ["acelords", "lexxyungcarter", "acelords products"],
+    "require": {
+        "php": ">=7.2",
+        "africastalking/africastalking": "^2.2",
+        "agog/osmose": "^0.1.0",
+        "artesaos/seotools": "^0.14",
+        "chencha/share": "^5.2",
+        "fideloper/proxy": "^4.0",
+        "geoip2/geoip2": "2.8.*",
+        "guzzlehttp/guzzle": "^6.3",
+        "helori/laravel-seo": "dev-master",
+        "highideas/laravel-users-online": "^2.4",
+        "intervention/image": "^2.4",
+        "laracasts/flash": "^3.0",
+        "laravel/framework": "5.8.*",
+        "laravel/helpers": "^1.0",
+        "laravel/horizon": "^3.2",
+        "laravel/passport": "^7.0",
+        "laravel/socialite": "^4.1",
+        "laravel/tinker": "^1.0",
+        "laravelcollective/html": "5.8.*",
+        "lexxyungcarter/ziggy": "^0.6.9.3",
+        "paypal/rest-api-sdk-php": "^1.13",
+        "pragmarx/tracker": "^3.3",
+        "pusher/pusher-php-server": "^3.4",
+        "rap2hpoutre/laravel-log-viewer": "^1.1",
+        "santigarcor/laratrust": "^5.2.1",
+        "spatie/laravel-sitemap": "^5.1",
+        "torann/geoip": "^1.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
+        "beyondcode/laravel-dump-server": "^1.0",
+        "filp/whoops": "^2.0",
+        "fzaninotto/faker": "^1.4",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^3.0",
+        "phpunit/phpunit": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AceLords\\Website\\": "src",
+            "AceLords\\Modules\\": "src/Modules/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AceLords\\Website\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AceLords\\Website\\Providers\\ProjectServiceProvider",
+                "AceLords\\Website\\Providers\\AuthServiceProvider",
+                "AceLords\\Website\\Providers\\EventServiceProvider",
+                "AceLords\\Website\\Providers\\HorizonServiceProvider",
+                "AceLords\\Website\\Providers\\PackagesServiceProvider",
+                "AceLords\\Website\\Providers\\RouteServiceProvider",
+                "AceLords\\Website\\Providers\\ComposerServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "license": "AceLords Proprietary Licence",
+    "authors": [
+        {
+            "name": "Lexx YungCarter",
+            "email": "spencermainaa@gmail.com"
+        },
+        {
+            "name": "AceLords System Engineers",
+            "email": "info@acelords.space"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
