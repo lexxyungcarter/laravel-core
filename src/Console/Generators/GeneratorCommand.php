@@ -180,18 +180,22 @@ abstract class GeneratorCommand extends Command
      */
     protected function replaceNamespace(&$stub, $name)
     {
+        $project = ucwords(strtolower($this->argument('project')));
+
         $stub = str_replace(
             [
                 'DummyNamespace', 
                 'DummyRootNamespace', 
                 'NamespacedDummyUserModel',
                 'DummyModelTableName',
+                'DummyAceLordsProjectName',
             ],
             [
                 $this->getNamespace($name), 
                 $this->rootNamespace(), 
                 $this->userProviderModel(),
                 $this->getDefaultModelTableName($name),
+                $project,
             ],
             $stub
         );

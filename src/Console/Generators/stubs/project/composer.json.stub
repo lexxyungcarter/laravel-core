@@ -1,8 +1,8 @@
 {
-    "name": "acelords/project",
+    "name": "acelords/DummyLowerCaseAceLordsProjectName",
     "description": "AceLords Project",
     "type": "library",
-    "keywords": ["acelords", "lexxyungcarter", "acelords products"],
+    "keywords": ["acelords", "lexxyungcarter", "acelords products", "acelords DummyLowerCaseAceLordsProjectName"],
     "require": {
         "php": ">=7.2",
         "africastalking/africastalking": "^2.2",

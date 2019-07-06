@@ -13,7 +13,7 @@ class ProjectMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'acelords:make-project';
+    protected $signature = 'acelords:make-project {project}';
 
     /**
      * The console command description.
@@ -43,15 +43,26 @@ class ProjectMakeCommand extends Command
     public function handle()
     {
         $project = strtolower($this->argument('project'));
-        $projectPaths = [
-            base_path("packages/{$project}/public"),
-            base_path("packages/{$project}/resources"),
-            base_path("packages/{$project}/src/Config/sidebar.php"),
-            base_path("packages/{$project}/src/Config/redis.php"),
-            base_path("packages/{$project}/src/Config/logging.php"),
-            base_path("packages/{$project}/src/Config/main.php"),
-            base_path("packages/{$project}/src/Modules"),
-            base_path("packages/{$project}/src/helpers.php"),
+
+        $projectDir = [
+            base_path("packages/{$project}/public/dummy.txt"),
+            base_path("packages/{$project}/resources/dummy.txt"),
+            base_path("packages/{$project}/src/Config/dummy.txt"),
+            base_path("packages/{$project}/src/Modules/dummy.txt"),
+        ];
+
+        $projectFiles = [
+            ['file' => base_path("packages/{$project}/src/Config/sidebar.php"), 'stub' => 'sidebar.stub'],
+            ['file' => base_path("packages/{$project}/src/Config/redis.php"), 'stub' => 'redis.stub'],
+            ['file' => base_path("packages/{$project}/src/Config/logging.php"), 'stub' => 'logging.stub'],
+            ['file' => base_path("packages/{$project}/src/Config/main.php"), 'stub' => 'main.stub'],
+            ['file' => base_path("packages/{$project}/src/helpers.php"), 'stub' => 'helpers.stub'],
+            ['file' => base_path("packages/{$project}/composer.json"), 'stub' => 'composer.json.stub'],
+            ['file' => base_path("packages/{$project}/babel.config.js"), 'stub' => 'babel.config.stub'],
+            ['file' => base_path("packages/{$project}/.gitignore"), 'stub' => '.gitignore.stub'],
+            ['file' => base_path("packages/{$project}/package.json"), 'stub' => 'package.json.stub'],
+            ['file' => base_path("packages/{$project}/webpack.config.js"), 'stub' => 'webpack.config.stub'],
+            ['file' => base_path("packages/{$project}/webpack.mix.js"), 'stub' => 'webpack.mix.stub'],
         ];
 
         $projectCommands = [
@@ -71,11 +82,28 @@ class ProjectMakeCommand extends Command
 
         // execute 
 
-        foreach($projectPaths as $path) {
-            $this->line("Creating " . $path . " directory");
+        foreach($projectDir as $path) {
+            $this->line("Creating directory: " . $path);
             $this->makeDirectory($path);
         }
         
+        foreach($projectFiles as $path) {
+            if($this->alreadyExists($path['file'])) 
+            {
+                $this->error("{$path['file']} already exists!");
+            } 
+            else {
+                $this->makeDirectory($path['file']);
+    
+                $stubName = $path['stub'];
+    
+                $stub = __DIR__ . "/stubs/project/{$stubName}";
+                $this->line('$stub', $stub);
+    
+                $this->files->put($path['file'], $this->buildClass($stub));
+            }
+
+        }
         
         foreach($projectCommands as $comm) {
             $this->line("Running " . $comm . " command");
@@ -101,6 +129,58 @@ class ProjectMakeCommand extends Command
         return $path;
     }
 
+    /**
+     * Determine if the class already exists.
+     *
+     * @param  string  $rawName
+     * @return bool
+     */
+    protected function alreadyExists($path)
+    {
+        return $this->files->exists($path);
+    }
+
+
+    /**
+     * Build the class with the given name.
+     *
+     * @return string
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    protected function buildClass($stub)
+    {
+        $stub = $this->files->get($stub);
+
+        return $this->replaceNamespace($stub);
+    }
+
+    /**
+     * Replace the namespace for the given stub.
+     *
+     * @param  string  $stub
+     * @param  string  $name
+     * @return string $stub
+     */
+    protected function replaceNamespace(&$stub)
+    {
+        $project = ucwords(strtolower($this->argument('project')));
+
+        $stub = str_replace(
+            [
+                'DummyAceLordsProjectName',
+                'DummyLowerCaseAceLordsProjectName',
+            ],
+            [
+                $project,
+                strtolower($project),
+            ],
+            $stub
+        );
+
+        return $stub;
+    }
+
+    
     /**
      * Get the console command arguments.
      *
