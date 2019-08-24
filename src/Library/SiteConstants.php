@@ -166,6 +166,15 @@ class SiteConstants
         $this->data->put('site_version', null);
         $this->data->put('site_codename', null);
         $this->data->put('product_name', null);
+
+        // social networks
+        $networks = [
+            'facebook', 'twitter', 'github', 'pinterest',
+            'whatsapp', 'telegram'
+        ];
+
+        foreach($networks as $n)
+            $this->data->put("site_{$n}", null);
     }
 
 }
