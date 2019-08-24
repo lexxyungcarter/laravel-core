@@ -71,7 +71,7 @@ return [
     |
     |
     */
-    'backendtheme' => [
+    'backend_theme' => [
         'admin' => env('ACELORDS_BACKENDTHEME_ADMIN', 'snowflake'),
         'client' => env('ACELORDS_BACKENDTHEME_CLIENT', 'snowflake'),
         'others' => env('ACELORDS_BACKENDTHEME_OTHERS', 'null'),
