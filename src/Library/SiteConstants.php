@@ -174,7 +174,7 @@ class SiteConstants
         ];
 
         foreach($networks as $n)
-            $this->data->put("site_{$n}", null);
+            $this->data->put("site_{$n}", '#');
     }
 
 }
