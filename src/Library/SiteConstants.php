@@ -154,20 +154,18 @@ class SiteConstants
     /**
      * Pre-fill entries if entries are not yet set
      */
-    private function setNotFoundOrganization()
+    private function setNotFoundOrganization() : array
     {
-        return [
-            'site_name', env('APP_NAME'),
-            'site_email', null,
-            'site_support_email', null,
-            'site_no_reply_email', null,
-            'site_mobile', null,
-            'site_telephone', null,
-            'site_theme_color', null,
-            'site_version', env('APP_VERSION'),
-            'site_codename', null,
-            'product_name', null,
-        ]
+        $this->data->put('site_name', env('APP_NAME'));
+        $this->data->put('site_email', null);
+        $this->data->put('site_support_email', null);
+        $this->data->put('site_no_reply_email', null);
+        $this->data->put('site_mobile', null);
+        $this->data->put('site_telephone', null);
+        $this->data->put('site_theme_color', null);
+        $this->data->put('site_version', null);
+        $this->data->put('site_codename', null);
+        $this->data->put('product_name', null);
     }
 
 }
