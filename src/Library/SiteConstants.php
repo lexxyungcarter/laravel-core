@@ -154,7 +154,7 @@ class SiteConstants
     /**
      * Pre-fill entries if entries are not yet set
      */
-    private function setNotFoundOrganization() : array
+    private function setNotFoundOrganization()
     {
         $this->data->put('site_name', env('APP_NAME'));
         $this->data->put('site_email', null);
