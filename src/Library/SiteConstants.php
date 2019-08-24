@@ -84,7 +84,11 @@ class SiteConstants
                         $this->data->put('site_' .$key, $item);
                     });
 
+            } else {
+                $this->setNotFoundOrganization();
             }
+        } else {
+            $this->setNotFoundOrganization();
         }
     }
 
@@ -145,6 +149,25 @@ class SiteConstants
         session()->put('site_version', $this->data->get('site_version'));
         session()->put('site_codename', $this->data->get('site_codename'));
         session()->put('product_name', $this->data->get('product_name'));
+    }
+
+    /**
+     * Pre-fill entries if entries are not yet set
+     */
+    private function setNotFoundOrganization()
+    {
+        return [
+            'site_name', env('APP_NAME'),
+            'site_email', null,
+            'site_support_email', null,
+            'site_no_reply_email', null,
+            'site_mobile', null,
+            'site_telephone', null,
+            'site_theme_color', null,
+            'site_version', env('APP_VERSION'),
+            'site_codename', null,
+            'product_name', null,
+        ]
     }
 
 }

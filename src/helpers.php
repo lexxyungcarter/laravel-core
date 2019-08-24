@@ -188,6 +188,20 @@ if (! function_exists('dd_blade_variables'))
 }
 
 
+if(! function_exists('is_collection'))
+{
+    /**
+     * Check if a variable is a collection, similar to is_array()
+     *
+     * @param mixed $variable
+     * @return bool
+     */
+    function is_collection($variable)
+    {
+        return $variable instanceof Illuminate\Support\Collection;
+    }
+}
+
 if(! function_exists('is_serialized'))
 {
     /**
