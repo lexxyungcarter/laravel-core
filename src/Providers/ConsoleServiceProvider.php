@@ -10,24 +10,6 @@ use AceLords\Core\Console\FixRoles;
 use AceLords\Core\Console\AssetsCommand;
 use AceLords\Core\Console\UpdateRedisKey;
 
-// generators
-use AceLords\Core\Console\Generators\ChannelMakeCommand;
-use AceLords\Core\Console\Generators\ConsoleMakeCommand;
-use AceLords\Core\Console\Generators\EventMakeCommand;
-use AceLords\Core\Console\Generators\JobMakeCommand;
-use AceLords\Core\Console\Generators\ListenerMakeCommand;
-use AceLords\Core\Console\Generators\MailMakeCommand;
-use AceLords\Core\Console\Generators\ModelMakeCommand;
-use AceLords\Core\Console\Generators\NotificationMakeCommand;
-use AceLords\Core\Console\Generators\PolicyMakeCommand;
-use AceLords\Core\Console\Generators\ProviderMakeCommand;
-use AceLords\Core\Console\Generators\RequestMakeCommand;
-use AceLords\Core\Console\Generators\ResourceMakeCommand;
-use AceLords\Core\Console\Generators\RuleMakeCommand;
-use AceLords\Core\Console\Generators\ProjectMakeCommand;
-use AceLords\Core\Console\Generators\MiddlewareMakeCommand;
-use AceLords\Core\Console\Generators\ControllerMakeCommand;
-
 class ConsoleServiceProvider extends ServiceProvider
 {
     /**
@@ -43,30 +25,6 @@ class ConsoleServiceProvider extends ServiceProvider
         UpdateRedisKey::class,
     ];
 
-    /**
-     * the available acelords generators
-     * 
-     * @var array
-     */
-    protected $generators = [
-        ConsoleMakeCommand::class,
-        ChannelMakeCommand::class,
-        EventMakeCommand::class,
-        JobMakeCommand::class,
-        ListenerMakeCommand::class,
-        MailMakeCommand::class,
-        ModelMakeCommand::class,
-        NotificationMakeCommand::class,
-        PolicyMakeCommand::class,
-        ProviderMakeCommand::class,
-        RequestMakeCommand::class,
-        ResourceMakeCommand::class,
-        RuleMakeCommand::class,
-        ProjectMakeCommand::class,
-        MiddlewareMakeCommand::class,
-        ControllerMakeCommand::class,
-    ];
-
 
     /**
      * Register services.
@@ -76,7 +34,6 @@ class ConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands($this->commands);
-        $this->commands($this->generators);
     }
 
     /**
