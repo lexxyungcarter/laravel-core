@@ -71,10 +71,6 @@ class AceLordsCoreServiceProvider extends ServiceProvider
             __DIR__ . '/../Config/logging.php' => config_path('acelords_logging.php'),
         ], 'acelords_logging');
         
-        
-        $this->publishes([
-            __DIR__ . '/../Config/generator.php' => config_path('acelords_generator.php'),
-        ], 'acelords_generator');
     }
 
     /**
@@ -94,10 +90,6 @@ class AceLordsCoreServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(
             __DIR__.'/../Config/logging.php', 'acelords_logging'
-        );
-        
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/generator.php', 'acelords_generator'
         );
     }
 
