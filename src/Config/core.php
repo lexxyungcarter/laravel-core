@@ -81,4 +81,19 @@ return [
         'dashboard' => env('ACELORDS_BACKENDTHEME_ADMIN', 'vuetify') . '.layouts.main'
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | System passport configuration
+    |--------------------------------------------------------------------------
+    |
+    | This option provides basic config for passport
+    |
+    */
+    'passport' => [
+        'grant_type' => 'password',
+        'client_id' => env('PASSPORT_CLIENT'),
+        'client_secret' => env('PASSPORT_TOKEN'),
+        'scope' => ''
+    ],
+
 ];
