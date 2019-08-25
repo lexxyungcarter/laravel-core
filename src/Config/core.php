@@ -96,4 +96,24 @@ return [
         'scope' => ''
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Seeder Generator
+    |--------------------------------------------------------------------------
+    |
+    | Used when seeding to create the permissions in a readable format from the seed classes
+    | For example:- view all users | create a user | update a user | delete a user
+    |
+    */
+    'resources' => [
+        'index' => 'View all %s',
+        
+        'create' => 'Create a %s',
+        
+        'update' => 'Update a %s',
+        
+        'destroy' => 'Delete a %s',
+    ],
+    
+
 ];
