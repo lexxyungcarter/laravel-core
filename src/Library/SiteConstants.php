@@ -65,9 +65,14 @@ class SiteConstants
         // site details manenos
         if ($this->data->get('site_domain'))
         {
-            $orgDetails = $this->repo->get('organisations')
-                ->where('domain_id', $this->data->get('site_domain')->id)
-                ->first();
+            $orgDetails = $this->repo->get('organisations');
+            
+            if($orgDetails)
+            {
+                $orgDetails = $this->repo->get('organisations')
+                    ->where('domain_id', $this->data->get('site_domain')->id)
+                    ->first();
+            }
 
             if ($orgDetails)
             {
@@ -79,10 +84,13 @@ class SiteConstants
                     });
 
                 // append social sites
-                collect(json_decode(collect((array)($orgDetails))->get('social_profiles')))
-                    ->each(function($item, $key) {
+                $socialProfiles = collect(json_decode(collect((array)($orgDetails))->get('social_profiles')));
+                if($socialProfiles)
+                {
+                    $socialProfiles->each(function($item, $key) {
                         $this->data->put('site_' .$key, $item);
                     });
+                }
 
             } else {
                 $this->setNotFoundOrganization();
