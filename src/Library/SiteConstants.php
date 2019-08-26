@@ -90,6 +90,8 @@ class SiteConstants
         } else {
             $this->setNotFoundOrganization();
         }
+
+        $this->setNotFoundMediaProfile();
     }
 
     /**
@@ -166,15 +168,23 @@ class SiteConstants
         $this->data->put('site_version', null);
         $this->data->put('site_codename', null);
         $this->data->put('product_name', null);
+    }
 
+    /**
+     * set profile
+     */
+    private function setNotFoundMediaProfile()
+    {
         // social networks
         $networks = [
             'facebook', 'twitter', 'github', 'pinterest',
             'whatsapp', 'telegram'
         ];
 
-        foreach($networks as $n)
-            $this->data->put("site_{$n}", '#');
+        foreach($networks as $n) {
+            if(! $this->data->get("site_{$n}"))
+                $this->data->put("site_{$n}", '#');
+        }
     }
 
 }
