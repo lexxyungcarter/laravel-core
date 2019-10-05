@@ -225,6 +225,7 @@ class SeoManagerService
         return [
             'global-description' => $this->description,
             'global-title' => $this->title,
+            'title' => $this->title,
             'description' => $this->description,
             'og-title' => $this->title,
             'og-type' => $this->pageType,
