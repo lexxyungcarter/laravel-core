@@ -9,6 +9,7 @@
 namespace AceLords\Core\Library\Services;
 
 use AceLords\Core\Library\SiteConstants;
+use Seo;
 
 class SeoManagerService
 {
