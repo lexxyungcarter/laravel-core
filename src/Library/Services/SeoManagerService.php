@@ -24,7 +24,7 @@ class SeoManagerService
      *
      * @var string
      */
-    protected $twitterUsername, $facebookUrl;
+    protected $twitterUsername, $facebookUrl, $fbAppId = null;
     
     /**
      * Hold redis seo config index/key
@@ -175,11 +175,11 @@ class SeoManagerService
     }
     
     /**
-     * sort SEO content according to page.
+     * generate SEO content according to page.
      *
      * @return array $seos
      */
-    public function data() : array
+    public function generate() : array
     {
         return [
             Seo::set('global-description', $this->description),
@@ -211,6 +211,38 @@ class SeoManagerService
             //     'opening-hours' => 'Mo, Tu, We, Th, Fr, Sa 08:00-17:00',
             //     'available-languages' => ['English', 'Swahili']
             // ])
+        ];
+    }
+    
+    /**
+     * get seo data in array
+     *
+     * @return array
+     */
+    public function data() : array
+    {
+        return [
+            'global-description' => $this->description,
+            'global-title' => $this->title,
+            'description' => $this->description,
+            'og-title' => $this->title,
+            'og-type' => $this->pageType,
+            'keywords' => $this->keywords,
+            'og-locale' => 'en-US',
+            'canonical-url' => url()->current(),
+            'og-image-url' => $this->imageUrl,
+            'og-site-name' => $this->siteName,
+            'logo-url' => $this->siteLogo,
+            'facebook-url' => $this->facebookUrl,
+            'set-similar-to' => [$this->facebookUrl, 'https://twitter.com/' . $this->twitterUsername],
+            'twitter-sign' => '@' . $this->twitterUsername,
+            'fb-app-id' => $this->fbAppId,
+            'email' => $this->email,
+            'phone' => $this->mobile,
+            'breadcrumblist' => [
+                ['title' => 'Home', 'url' => request()->root()],
+                ['title' => $this->title, 'url' => url()->current()]
+            ],
         ];
     }
     
