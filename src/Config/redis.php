@@ -4,7 +4,7 @@
 $keys = [];
 
 $redisExtras = [
-    'domains', 'organisations', 'themes', 'configurations',
+    'domains', 'organisations', 'themes', 'configurations', 'seos',
 ];
 
 $models = [
