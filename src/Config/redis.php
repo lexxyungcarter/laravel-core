@@ -1,6 +1,5 @@
 <?php
 
-
 $keys = [];
 
 $redisExtras = [
@@ -45,7 +44,7 @@ return [
      * Replace with AceLords Project Namespace
      */
     'models' => [
-        'configuration' => 'AceLords\Website\Models\Configuration',
+        'configuration' => AceLords\Core\Models\Configuration::class,
     ],
 
 ];

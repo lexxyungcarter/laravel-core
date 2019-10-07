@@ -3,10 +3,12 @@
 namespace AceLords\Core\Library\RedisConfigurations;
 
 use AceLords\Core\Library\Contracts\RedisInterface;
+use AceLords\Core\Models\Configuration;
 
 class Settings extends RedisTemplate implements RedisInterface
 {
     protected $data = [];
+    protected $configModel;
 
     /*
      * Set the keys as they are to be returned to redis
