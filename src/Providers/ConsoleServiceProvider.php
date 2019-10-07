@@ -9,6 +9,7 @@ use AceLords\Core\Console\TestQueue;
 use AceLords\Core\Console\FixRoles;
 use AceLords\Core\Console\AssetsCommand;
 use AceLords\Core\Console\Sudofy;
+use AceLords\Core\Console\UpdateConfigurations;
 use AceLords\Core\Console\UpdateRedisKey;
 
 class ConsoleServiceProvider extends ServiceProvider
@@ -25,6 +26,7 @@ class ConsoleServiceProvider extends ServiceProvider
         AssetsCommand::class,
         UpdateRedisKey::class,
         Sudofy::class,
+        UpdateConfigurations::class,
     ];
 
 
