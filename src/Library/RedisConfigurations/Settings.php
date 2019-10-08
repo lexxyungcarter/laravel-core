@@ -69,7 +69,11 @@ class Settings extends RedisTemplate implements RedisInterface
      */
     public function getModel()
     {
-        return new config("acelords_redis.models.configuration");
+        $class = config("acelords_redis.models.configuration");
+        if(! class_exists($class))
+            throw new \Exception("{$class} does not exist!");
+        
+        return new $class();
     }
 
     /*
