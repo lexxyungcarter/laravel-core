@@ -1,46 +1,58 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Auth Dashboard
-|--------------------------------------------------------------------------
-|
-| You should replace the Generator class with a custom one as per the project.
-| All sidebars should implement 
-| AceLords\Core\Library\Contracts\SidebarsInterface;
-|
-*/
-
-use AceLords\Core\Library\Sidebars\SidebarGenerator;
-
 return [
-    'sudo' => SidebarGenerator::forSudo(),
+    /*
+    |--------------------------------------------------------------------------
+    | Sidebar Generator Class
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the class that handles the sidebar
+    | The sidebar is then fetched as "SidebarGenerator::get('sudo')" or something
+    */
+    'class' => 'App\Library\Sidebars\SidebarGenerator',
 
-    'general' => array_merge(
-        /*
-        |--------------------------------------------------------------------------
-        | Admin|Superadmin Dashboard
-        |--------------------------------------------------------------------------
-        |
-        | This option controls the sidebar items admins should see.
-        | The role is normally named as 'admin'
-        |
-        */
-        SidebarGenerator::forAdmin(),
+    /*
+    |--------------------------------------------------------------------------
+    | Example Module sidebar.php
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the class that handles the sidebar
+    | The sidebar is then fetched as "SidebarGenerator::get('sudo')" or something
+    */
 
-    
-        /*
-        |--------------------------------------------------------------------------
-        | client Dashboard
-        |--------------------------------------------------------------------------
-        |
-        | This option controls the sidebar items clients should see.
-        | The role is normally named as 'client'
-        |
-        */
-        SidebarGenerator::forClient()
-    
-    )
+    // 'general' => [
+    //     [
+    //         'name' => 'My Samples',
+    //         'icon' => 'fa fa-file-word-o',
+    //         'route' => 'admin.my.samples.index',
+    //         'permissions' => 'admin.samples.index',
+    //     ],
+    //     [
+    //         'name' => 'Admin Functions',
+    //         'icon' => 'settings',
+    //         'order' => 20,
+    //         'permissions' => 'admin.*',
 
+    //         'children' => [
+    //             [
+    //                 'name' => 'All Promotions',
+    //                 'route' => 'admin.promotions.index',
+    //                 'permissions' => 'admin.promotions.index',
+    //             ],
+    //         ],
+    //     ],
+    // ],
 
+    // 'sudo' => [
+    //     [
+    //         'name' => 'Trash',
+    //         'icon' => 'delete',
+    //         'children' => [
+    //             [
+    //                 'name' => 'Users',
+    //                 'route' => 'admin.trash.users.index',
+    //             ],
+    //         ],
+    //     ]
+    // ]
 ];

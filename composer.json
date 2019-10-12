@@ -26,6 +26,7 @@
         "laravel": {
             "providers": [
                 "AceLords\\Core\\Providers\\AceLordsCoreServiceProvider",
+                "AceLords\\Core\\Providers\\RouteServiceProvider",
                 "AceLords\\Core\\Providers\\RedisServiceProvider",
                 "AceLords\\Core\\Providers\\PackagesServiceProvider",
                 "AceLords\\Core\\Providers\\ConsoleServiceProvider",

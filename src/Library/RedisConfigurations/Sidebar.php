@@ -20,34 +20,11 @@ class Sidebar extends RedisTemplate implements RedisInterface
      */
     public function data($key = null)
     {
-        if($key == "sidebar")
-        {
-            return $this->generalSidebar();
+        if($key == "sidebar") {
+            return $this->getSidebar('general');
         }
 
-        return $this->sudoSidebar();
-    }
-
-    /**
-     * get the general entries for sidebar
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    protected function generalSidebar()
-    {
-        $data  = collect();
-
-        $sidebarConfig = config("acelords_sidebar.general");
-
-        if($sidebarConfig)
-        {
-            foreach($sidebarConfig as $config)
-            {
-                $data->push(collect($config)->recursive());
-            }
-        }
-
-        return $data;
+        return $this->getSidebar('sudo');
     }
 
     /**
@@ -55,20 +32,21 @@ class Sidebar extends RedisTemplate implements RedisInterface
      *
      * @return \Illuminate\Support\Collection
      */
-    protected function sudoSidebar()
+    protected function getSidebar(string $key) : array
     {
         $data  = collect();
-
-        $sidebarConfig = config("acelords_sidebar.sudo");
-
-        if($sidebarConfig)
+        $sidebarClass = config("acelords_sidebar.class");
+        
+        if(! class_exists($sidebarClass))
+            throw new \Exception("Sidebar Class not found!");
+        
+        $class = new $sidebarClass();
+    
+        foreach($class::get($key) as $config)
         {
-            foreach($sidebarConfig as $config)
-            {
-                $data->push(collect($config)->recursive());
-            }
+            $data->push(collect($config)->recursive());
         }
 
-        return $data;
+        return $data->toArray();
     }
 }
