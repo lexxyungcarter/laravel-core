@@ -12,3 +12,8 @@
 */
 
 Route::get('/redis/fetch', 'RedisController@fetch');
+
+/**
+ * system settings
+ */
+Route::get('/settings', 'ConfigController@settings')->name('system.settings');
