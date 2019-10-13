@@ -53,7 +53,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
              ->namespace($this->namespace)
-             ->group('./../Routes/web.php');
+             ->group('/../Routes/web.php');
     }
 
     /**
@@ -69,6 +69,6 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->as('api.')
              ->namespace($this->namespace)
-             ->group('./../Routes/api.php');
+             ->group('/../Routes/api.php');
     }
 }
