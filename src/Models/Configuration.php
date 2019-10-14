@@ -17,7 +17,7 @@ class Configuration extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->table = config('acelords_core.defaults.tables.configurations');
+        $this->table = config('acelords_redis.defaults.tables.configurations');
         
         parent::__construct($attributes);
     }

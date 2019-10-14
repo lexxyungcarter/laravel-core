@@ -43,8 +43,14 @@ return [
      * Specify Configuration Model to use.
      * Replace with AceLords Project Namespace
      */
-    'models' => [
-        'configuration' => AceLords\Core\Models\Configuration::class,
+    'defaults' => [
+        'models' => [
+            'configuration' => AceLords\Core\Models\Configuration::class,
+        ],
+
+        'tables' => [
+            'configurations' => 'configurations',
+        ]
     ],
 
 ];

@@ -115,11 +115,4 @@ return [
         'destroy' => 'Delete a %s',
     ],
 
-    'defaults' => [
-        'tables' => [
-            'configurations' => 'configurations',
-        ]
-    ]
-    
-
 ];
