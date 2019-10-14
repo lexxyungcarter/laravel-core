@@ -124,9 +124,11 @@ class AceLordsCoreServiceProvider extends ServiceProvider
      */
     public function registerLogChannels()
     {
-        $this->app['log']->stack([
-            'channels' => config('acelords_logging.channels')
-        ]);
+        if(isset($this->app['log'])) {
+            $this->app['log']->stack([
+                'channels' => config('acelords_logging.channels')
+            ]);
+        }
     }
 
     /**
