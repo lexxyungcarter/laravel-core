@@ -24,7 +24,7 @@ class AceLordsCoreServiceProvider extends ServiceProvider
         $this->registerViews();
         // $this->registerFactories();
         // $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-        $this->registerLogChannels();
+        // $this->registerLogChannels();
 
         $this->loadMacros();
         $this->defineAssetPublishing();
