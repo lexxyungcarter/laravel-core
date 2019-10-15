@@ -11,6 +11,7 @@ use AceLords\Core\Console\AssetsCommand;
 use AceLords\Core\Console\Sudofy;
 use AceLords\Core\Console\UpdateConfigurations;
 use AceLords\Core\Console\UpdateRedisKey;
+use AceLords\Core\Console\TruncateTable;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class ConsoleServiceProvider extends ServiceProvider
         UpdateRedisKey::class,
         Sudofy::class,
         UpdateConfigurations::class,
+        TruncateTable::class,
     ];
 
 
