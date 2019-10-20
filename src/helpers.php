@@ -55,14 +55,14 @@ if (! function_exists('core_paginate'))
     }
 }
 
-if (!function_exists('ddd'))
+if (!function_exists('dde'))
 {
 
     /**
      * add to the default dd()
      * to return 500 response code for ajax error detection
      */
-    function ddd(...$vars)
+    function dde(...$vars)
     {
         http_response_code(500);
 
