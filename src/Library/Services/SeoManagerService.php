@@ -89,7 +89,7 @@ class SeoManagerService
         $seoDetails = $redis->get($this->redisKey)->where('page', $page)->first();
         
         if(! $seoDetails) {
-            $this->setTitle(ucwords($page));
+            $this->setTitle(ucwords(str_replace('-', ' ', $page)));
             
             return $this;
         }
