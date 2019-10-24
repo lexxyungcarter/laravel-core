@@ -109,4 +109,13 @@ class Settings extends RedisTemplate implements RedisInterface
 
         return $this->configurations();
     }
+
+    /**
+     * truncate config table
+     */
+    public function truncateTable()
+    {
+        Configuration::truncate();
+    }
+    
 }

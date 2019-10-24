@@ -42,6 +42,11 @@ class UpdateConfigurations extends Command
     {
         $this->info('Updating system configuration...');
     
+        if ($this->confirm('Do you wish to truncate configurations table?', false))
+        {
+            (new Settings())->truncateTable();
+        }
+        
         if ($this->confirm('Do you wish to repopulate configurations?', true))
         {
             $settings = new Settings();
