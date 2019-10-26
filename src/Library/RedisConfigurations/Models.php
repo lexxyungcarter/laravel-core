@@ -24,7 +24,7 @@ class Models extends RedisTemplate implements RedisInterface
         {
             $model = new $key();
             $dbName = $model->getTable();
-            $data = $model->get();
+            $data = $model->get()->toArray();
 
             return [
                 'key' => $dbName,
