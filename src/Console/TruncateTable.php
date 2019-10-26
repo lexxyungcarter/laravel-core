@@ -42,10 +42,22 @@ class TruncateTable extends Command
 
         try {
             DB::table($table)->truncate();
+            $this->info("Table truncated!");
         } catch(\Exception $e) {
             $this->error("An error occurred truncating the table!");
+    
+            if($this->confirm('Try while disabling foreign keys?'))
+            {
+                DB::statement("SET foreign_key_checks=0");
+                
+                DB::table($table)->truncate();
+    
+                DB::statement("SET foreign_key_checks=1");
+                
+                $this->info("Table truncated!");
+                
+            }
         }
-
-        $this->info("Table truncated!");
+        
     }
 }
