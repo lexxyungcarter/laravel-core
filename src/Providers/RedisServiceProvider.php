@@ -70,8 +70,8 @@ class RedisServiceProvider extends ServiceProvider
         {
             if(class_exists($key))
             {
-                $model = new $key();
-                $key = $model->getTable();
+                // $model = new $key();
+                // $key = $model->getTable();
                 
                 if(! $redis->exists($key))
                     $redis->store($select, $key);

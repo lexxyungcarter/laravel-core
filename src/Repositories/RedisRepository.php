@@ -26,7 +26,7 @@ class RedisRepository
         $r = Redis::connection();
         $this->redis = $r;
 
-        $this->prefix = config('acelords_core.redis.application_prefix');
+        $this->prefix = config('acelords_redis.application_prefix');
     }
 
     /*
