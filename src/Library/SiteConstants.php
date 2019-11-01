@@ -155,6 +155,7 @@ class SiteConstants
         session()->put('site_no_reply_email', $this->data->get('site_no_reply_email'));
         session()->put('site_mobile', $this->data->get('site_mobile'));
         session()->put('site_telephone', $this->data->get('site_telephone'));
+        session()->put('site_address', $this->data->get('site_address'));
         session()->put('site_theme_color', $this->data->get('site_theme_color'));
         session()->put('site_version', $this->data->get('site_version'));
         session()->put('site_codename', $this->data->get('site_codename'));
@@ -172,6 +173,7 @@ class SiteConstants
         $this->data->put('site_no_reply_email', null);
         $this->data->put('site_mobile', null);
         $this->data->put('site_telephone', null);
+        $this->data->put('site_address', null);
         $this->data->put('site_theme_color', null);
         $this->data->put('site_version', null);
         $this->data->put('site_codename', null);
