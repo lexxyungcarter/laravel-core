@@ -168,16 +168,24 @@ class SiteConstants
     private function setNotFoundOrganization()
     {
         $this->data->put('site_name', env('APP_NAME'));
+        $this->data->put('site_address', null);
+        $this->data->put('site_telephone', null);
+        $this->data->put('site_mobile', null);
         $this->data->put('site_email', null);
         $this->data->put('site_support_email', null);
         $this->data->put('site_no_reply_email', null);
-        $this->data->put('site_mobile', null);
-        $this->data->put('site_telephone', null);
-        $this->data->put('site_address', null);
+        $this->data->put('site_office', null);
+        $this->data->put('site_street', null);
+        $this->data->put('site_building', null);
+        $this->data->put('site_fax', null);
+        $this->data->put('site_pin', null);
+        $this->data->put('site_logo', null);
+        $this->data->put('site_slogan', null);
+        $this->data->put('site_bio', null);
         $this->data->put('site_theme_color', null);
         $this->data->put('site_version', null);
-        $this->data->put('site_codename', null);
         $this->data->put('product_name', null);
+        $this->data->put('site_codename', null);
     }
 
     /**
