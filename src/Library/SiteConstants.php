@@ -85,11 +85,29 @@ class SiteConstants
 
                 // append social sites
                 $socialProfiles = collect(json_decode(collect((array)($orgDetails))->get('social_profiles')));
-                if($socialProfiles)
+                if($socialProfiles && count($socialProfiles) > 0)
                 {
                     $socialProfiles->each(function($item, $key) {
                         $this->data->put('site_' .$key, $item);
                     });
+                } else {
+                    $this->setNotFoundMediaProfile();
+                }
+
+                // append country name
+                $countryId = $this->data->get('site_country_id');
+                if($countryId) {
+                    $country = $this->repo->get('countries')
+                        ->where('id', $countryId)
+                        ->first();
+
+                    if($country) {
+                        $this->data->put('site_country', $country->name);
+                    } else {
+                        $this->data->put('site_country', null);
+                    }
+                } else {
+                    $this->data->put('site_country', null);
                 }
 
             } else {
@@ -168,6 +186,7 @@ class SiteConstants
     private function setNotFoundOrganization()
     {
         $this->data->put('site_name', env('APP_NAME'));
+        $this->data->put('site_country', null);
         $this->data->put('site_address', null);
         $this->data->put('site_telephone', null);
         $this->data->put('site_mobile', null);
@@ -195,8 +214,9 @@ class SiteConstants
     {
         // social networks
         $networks = [
-            'facebook', 'twitter', 'github', 'pinterest',
-            'whatsapp', 'telegram'
+            'facebook', 'twitter', 'github', 'pinterest', 'discord',
+            'whatsapp', 'telegram', 'instagram', 'dribble', 'linkedin',
+            'youtube', 'patreon', 'buymecoffee',
         ];
 
         foreach($networks as $n) {
