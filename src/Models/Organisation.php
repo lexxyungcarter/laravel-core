@@ -17,6 +17,10 @@ class Organisation extends Model
         "social_profiles", "email", "no_reply_email", "support_email",
     ];
 
+    protected $casts = [
+        'social_profiles' => 'array',
+    ];
+
     /**
      * an organisation belongs to a certain domain
      *
