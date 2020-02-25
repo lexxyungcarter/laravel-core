@@ -195,6 +195,7 @@ class SiteConstants
         $this->data->put('site_no_reply_email', null);
         $this->data->put('site_office', null);
         $this->data->put('site_street', null);
+        $this->data->put('site_town', null);
         $this->data->put('site_building', null);
         $this->data->put('site_fax', null);
         $this->data->put('site_pin', null);
