@@ -1,5 +1,5 @@
 {
-    "name": "acelords/core",
+    "name": "acelords/laravel-core",
     "description": "The core system for AceLords Products",
     "type": "library",
     "require": {
