@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use AceLords\Core\Repositories\RedisRepository;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 
 if (! function_exists('adjustBrightness'))
 {
@@ -306,6 +307,11 @@ if (!function_exists('filenameSanitizer')) {
         $nicename = preg_replace('([^\w\s\d\-_~,;\[\]\(\).])', '', $nicename);
         // remove any runs of periods
         $nicename = preg_replace('([\.]{2,})', '', $nicename);
+        // remove any non-alpha-numeric characters
+        $nicename = preg_replace("/[^a-zA-Z0-9]+/", "", $nicename);
+        // ensure the length is more than ten characters
+        if(strlen($nicename) < 10)
+            $nicename .= "-" . Str::random(10);
 
         return $nicename;
     }
