@@ -2,7 +2,6 @@
 
 namespace AceLords\Core\Library;
 
-
 class Datatable
 {
     protected $headers = [];
@@ -23,29 +22,54 @@ class Datatable
      |
      | or even
      |  'name', ['text' => 'amount', 'align' => 'right'], 'type', ['text' => 'used?', 'value' => 'used'], 'actions'
-     |
+     | 
+     | Available Header attributes - From Vuetify v2
+     |  {
+     |     text: string
+     |     value: string
+     |     align?: 'start' | 'center' | 'end'
+     |     sortable?: boolean
+     |     filterable?: boolean
+     |     groupable?: boolean
+     |     divider?: boolean
+     |     class?: string | string[]
+     |     width?: string | number
+     |     filter?: (value: any, search: string, item: any) => boolean
+     |     sort?: (a: any, b: any) => number
+     |   }
      |
      */
 
     /**
-     * @param $headers
+     * @param string|array $headers
      *
      * @return array
      */
 
-    /*
+    /**
      * Prepare the headers. The headers are very friendly to set, and here at the top is sample code
+     * 
+     * @param array $headers
+     *
+     * @return array
      */
-    public function headers($headers)
+    public function headers(array $headers) : array
     {
         foreach($headers as $header)
         {
-            array_push($this->headers, [
+            $arr = [
                 'text' => $this->getText($header),
                 'sortable' => $this->getSortable($header),
                 'value' => $this->getValue($header),
                 'align' => $this->getAlignment($header),
-            ]);
+            ];
+
+            isset($header['filterable']) ? $arr = array_merge($arr, ['filterable' => $this->getBoolean($header, 'filterable')]) : null;
+            isset($header['sortable']) ? $arr = array_merge($arr, ['sortable' => $this->getBoolean($header, 'sortable')]) : null;
+            isset($header['groupable']) ? $arr = array_merge($arr, ['groupable' => $this->getBoolean($header, 'groupable')]) : null;
+            isset($header['divider']) ? $arr = array_merge($arr, ['divider' => $this->getBoolean($header, 'divider')]) : null;
+
+            $this->headers[] = $arr;
         }
 
         return $this->headers;
@@ -54,7 +78,7 @@ class Datatable
     /**
      * get the text for the datatable. This is the display
      *
-     * @param $header
+     * @param string|array $header
      *
      * @return string
      */
@@ -72,7 +96,7 @@ class Datatable
     /**
      * get the value. This value is used in searching the vuetify datatable when no ajax search is required
      *
-     * @param $header
+     * @param string|array $header
      *
      * @return string
      */
@@ -88,9 +112,27 @@ class Datatable
     }
 
     /**
+     * get the boolean value.
+     *
+     * @param string|array $header
+     *
+     * @return bool
+     */
+    private function getBoolean($header, $entity)
+    {
+        $bool = $header;
+
+        if(is_array($header) and isset($header[$entity])) {
+            $bool = $header[$entity];
+        }
+
+        return is_array($bool) ? (bool)(strtolower(collect($bool)->first())) : (bool)(strtolower($bool));
+    }
+
+    /**
      * get the sortable attribute
      *
-     * @param $header
+     * @param string|array $header
      *
      * @return bool|mixed
      */
@@ -109,7 +151,14 @@ class Datatable
 
         return $value;
     }
-
+    
+    /**
+     * Get allignment attr
+     * 
+     * @param string|array $header
+     *
+     * @return mixed|string
+     */
     private function getAlignment($header)
     {
         $value = 'left';
@@ -124,7 +173,7 @@ class Datatable
     /**
      * function to get the value for a certain index.
      *
-     * @param $header
+     * @param string|array $header
      * @param int $index
      *
      * @return mixed
