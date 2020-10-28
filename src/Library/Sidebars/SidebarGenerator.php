@@ -2,7 +2,6 @@
 
 namespace AceLords\Core\Library\Sidebars;
 
-
 class SidebarGenerator
 {
     /**

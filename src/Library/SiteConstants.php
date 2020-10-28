@@ -8,7 +8,6 @@ use AceLords\Core\Repositories\RedisRepository;
 
 class SiteConstants
 {
-
     protected $repo, $data;
 
     /**

@@ -6,7 +6,6 @@ use AceLords\Core\Library\Contracts\RedisInterface;
 
 class Sidebar extends RedisTemplate implements RedisInterface
 {
-
     /*
      * Set the keys as they are to be returned to redis
      */

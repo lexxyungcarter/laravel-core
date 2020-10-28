@@ -10,7 +10,7 @@
 
 namespace AceLords\Core\Repositories;
 
-use Redis;
+use Illuminate\Support\Facades\Redis;
 use AceLords\Core\Library\Contracts\RedisInterface;
 
 class RedisRepository

@@ -76,10 +76,10 @@ if (!function_exists('dde'))
 }
 
 
-if(!function_exists('doe'))
+if(! function_exists('doe'))
 {
     /*
-     * Returns a list of the countries in the system
+     * Returns the logged in user w.r.t. the request
      */
     function doe()
     {
@@ -316,8 +316,6 @@ if (!function_exists('filenameSanitizer')) {
         return $nicename;
     }
 }
-
-
 
 if(! function_exists('command_exists'))
 {

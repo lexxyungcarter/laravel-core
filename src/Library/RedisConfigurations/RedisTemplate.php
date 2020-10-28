@@ -4,7 +4,6 @@ namespace AceLords\Core\Library\RedisConfigurations;
 
 abstract class RedisTemplate
 {
-
     protected $keys;
 
     public function __construct()

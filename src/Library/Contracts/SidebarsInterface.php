@@ -7,7 +7,7 @@ interface SidebarsInterface
     /**
      * return sidebar entries
      *
-     * @return mixed
+     * @return array
      */
     public function data() : array;
     
