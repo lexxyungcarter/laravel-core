@@ -12,6 +12,7 @@ use AceLords\Core\Console\Sudofy;
 use AceLords\Core\Console\UpdateConfigurations;
 use AceLords\Core\Console\UpdateRedisKey;
 use AceLords\Core\Console\TruncateTable;
+use AceLords\Core\Console\ClearRedis;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,7 @@ class ConsoleServiceProvider extends ServiceProvider
         Sudofy::class,
         UpdateConfigurations::class,
         TruncateTable::class,
+        ClearRedis::class,
     ];
 
 
