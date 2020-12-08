@@ -27,7 +27,7 @@ class RedisServiceProvider extends ServiceProvider
 
         $this->setRedisModels($redis);
 
-        $this->registerSidebar($redis);
+        // $this->registerSidebar($redis);
 
         $this->registerSettings($redis);
 
