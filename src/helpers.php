@@ -78,7 +78,7 @@ if (!function_exists('dde'))
 
 if(! function_exists('doe'))
 {
-    /*
+    /**
      * Returns the logged in user w.r.t. the request
      */
     function doe()
@@ -95,7 +95,7 @@ if(! function_exists('doe'))
 
 if(! function_exists("eclair"))
 {
-    /*
+    /**
      * Prepares a date for a more user ready format
      */
     function eclair($date, $time = true, $toW3cString = false)
@@ -166,7 +166,7 @@ if(! function_exists('_is_curl_installed'))
 
 if (! function_exists('redis'))
 {
-    /*
+    /**
      * Return an instance of our custom redis repository
      */
     function redis()

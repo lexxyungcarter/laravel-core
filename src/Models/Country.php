@@ -14,7 +14,7 @@ class Country extends Model
     
     public $timestamps = false;
     
-    /*
+    /**
      * Change the route model binding column
      */
     public function getRouteKeyName()
@@ -22,7 +22,7 @@ class Country extends Model
         return "slug";
     }
     
-    /*
+    /**
      * Set the country's slug as you are setting the name
      */
     public function setNameAttribute($value)

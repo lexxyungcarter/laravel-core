@@ -3,7 +3,12 @@
 $keys = [];
 
 $redisExtras = [
-    'domains', 'organisations', 'themes', 'configurations', 'seos',
+    ['table' => 'domains', 'roles' => ['admin', 'sudo']],
+    ['table' => 'organisations', 'roles' => ['admin', 'sudo']],
+    ['table' => 'roles', 'roles' => ['admin', 'sudo']],
+    ['table' => 'permissions', 'roles' => ['admin', 'sudo']],
+
+    'themes', 'configurations', 'seos',
 ];
 
 $models = [
@@ -21,7 +26,7 @@ return [
     |
     */
 
-    /*
+    /**
      * Redis prefix to facilitate searches on a module and creation of database builder
      * For example, within redis configuration templates, we execute the method DB::table(settings_*)
      * Prefix is appended to items store within the redis server
@@ -34,9 +39,9 @@ return [
 
     'models' => $models,
 
-    /*
-    * Attached to redis in order to identify and distinguish the application
-    */
+    /**
+     * Attached to redis in order to identify and distinguish the application
+     */
     'application_prefix' => env('REDIS_PREFIX', 'acelords_webapps_'),
 
     /**

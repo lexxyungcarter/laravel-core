@@ -18,7 +18,7 @@ class RedisRepository
 
     public $redis, $prefix;
 
-    /*
+    /**
      * Initialize redis
      */
     public function __construct()
@@ -29,7 +29,7 @@ class RedisRepository
         $this->prefix = config('acelords_redis.application_prefix');
     }
 
-    /*
+    /** 
      * Get a single item from the redis server
      * Does not create an item if not found
      */
@@ -40,7 +40,7 @@ class RedisRepository
         return $this->redis->get($key) ? unserialize($this->redis->get($key)) : null;
     }
 
-    /*
+    /**
      * Store data as key => value pair into redis
      */
     public function store(RedisInterface $contract, $key)
@@ -69,7 +69,7 @@ class RedisRepository
         return $this;
     }
 
-    /*
+    /** 
      * Get an item or list of items by key(s) from the redis server
      * Creates the item if it does not exist in the redis server
      */
@@ -91,7 +91,7 @@ class RedisRepository
         return count($data) == 1 ? array_first($data) : $data;
     }
 
-    /*
+    /**
      * Reset the redis data and pull in new ones
      */
     public function reset(RedisInterface $contract, $key)
@@ -103,7 +103,7 @@ class RedisRepository
         return $this->store($contract, $key);
     }
 
-    /*
+    /** 
      * Checks if the key exists in the redis server
      */
     public function exists($key)

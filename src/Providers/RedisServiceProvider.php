@@ -45,7 +45,7 @@ class RedisServiceProvider extends ServiceProvider
         // });
     }
 
-    /*
+    /**
      * For seed classes that need to exist in redis and accessed also as selects within the UI
      */
     public function setRedisExtras($redis)
@@ -54,12 +54,16 @@ class RedisServiceProvider extends ServiceProvider
 
         foreach(config('acelords_redis.extras') as $key)
         {
+            if(is_array($key)) {
+                $key = $key['table'];
+            }
+
             if(! $redis->exists($key))
                 $redis->store($select, $key);
         }
     }
 
-    /*
+    /**
      * For seed classes that need to exist in redis and need to be fetched as models
      */
     public function setRedisModels($redis)
@@ -79,7 +83,7 @@ class RedisServiceProvider extends ServiceProvider
         }
     }
 
-    /*
+    /**
      * Register the general system sidebar.
      * Exist in modules config/settings
      */
@@ -94,7 +98,7 @@ class RedisServiceProvider extends ServiceProvider
             $redis->store($sidebar, 'sudo_sidebar');
     }
 
-    /*
+    /**
      * Register the general system settings.
      * Exist in modules config/settings
      */

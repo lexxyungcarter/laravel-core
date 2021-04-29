@@ -7,7 +7,7 @@ use AceLords\Core\Library\Datatable;
 
 class DomainResourceCollection extends ResourceCollection
 {
-    /*
+    /**
      * Define the headers and consequently values for the datatable
      */
     protected $headers = [
