@@ -18,7 +18,7 @@ class PackagesServiceProvider extends ServiceProvider
      * @var array
      */
     protected $packageProviders = [
-        "Helori\LaravelSeo\SeoServiceProvider",
+        \Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
     ];
     
     /**
@@ -26,7 +26,7 @@ class PackagesServiceProvider extends ServiceProvider
      * @var array
      */
     protected $facadeAliases = [
-        "Seo" => "Helori\LaravelSeo\Facades\Seo",
+        'Seo' => \Artesaos\SEOTools\Facades\SEOTools::class,
     ];
     
     /**

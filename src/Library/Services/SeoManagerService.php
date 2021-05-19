@@ -183,28 +183,22 @@ class SeoManagerService
     public function generate() : array
     {
         return [
-            Seo::set('global-description', $this->description),
-            Seo::set('global-title', $this->title),
-            Seo::set('title', $this->title),
-            Seo::set('description', $this->description),
-            Seo::set('og-title', $this->title),
-            Seo::set('og-type', $this->pageType),
-            Seo::set('keywords', $this->keywords),
-            Seo::set('og-locale', 'en-US'),
-            Seo::set('canonical-url', url()->current()),
-            Seo::set('og-image-url', $this->imageUrl),
-            Seo::set('og-site-name', $this->siteName),
-            Seo::set('logo-url', $this->siteLogo),
-            Seo::setSimilarTo($this->facebookUrl),
-            Seo::setSimilarTo('https://twitter.com/' . $this->twitterUsername),
-            Seo::set('twitter-sign', '@' . $this->twitterUsername),
-            // Seo::set('fb-app-id', 'My facebook app ID'),
-            Seo::set('email', $this->email),
-            Seo::set('phone', $this->mobile),
-            Seo::set('breadcrumblist', [
-                ['title' => 'Home', 'url' => request()->root()],
-                ['title' => $this->title, 'url' => url()->current()]
-            ]),
+            Seo::setTitle($this->title),
+            Seo::setDescription($this->description),
+            Seo::opengraph()->setUrl(request()->root()),
+            Seo::setCanonical(url()->current()),
+            Seo::opengraph()->addProperty('type', $this->pageType),
+            Seo::opengraph()->addProperty('keywords', $this->keywords),
+            Seo::twitter()->setSite('@' . $this->twitterUsername),
+            Seo::jsonLd()->addImage($this->imageUrl),
+            Seo::opengraph()->addProperty('logo-url', $this->siteLogo),
+            Seo::opengraph()->addProperty('email', $this->email),
+            Seo::opengraph()->addProperty('phone', $this->mobile),
+
+            // Seo::set('breadcrumblist', [
+            //     ['title' => 'Home', 'url' => request()->root()],
+            //     ['title' => $this->title, 'url' => url()->current()]
+            // ]),
             // Seo::setContactPoint([
             //     'type' => 'customer-service',
             //     'phone' => $this->get_option($s, "site_phone"),
