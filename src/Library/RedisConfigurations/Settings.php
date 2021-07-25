@@ -10,7 +10,7 @@ class Settings extends RedisTemplate implements RedisInterface
     protected $data = [];
     protected $configModel;
 
-    /*
+    /**
      * Set the keys as they are to be returned to redis
      */
     public function setKeys()
@@ -18,7 +18,7 @@ class Settings extends RedisTemplate implements RedisInterface
         $this->keys = ['settings', 'configurations'];
     }
 
-    /*
+    /** 
      * Returns sidebar data that should be put into redis
      * Data is fetched from modules config/settings.php
      */
@@ -32,7 +32,7 @@ class Settings extends RedisTemplate implements RedisInterface
         return $this->settings();
     }
 
-    /*
+    /**
      * Redis settings exist in two different states
      * These are the overall settings defined
      * In the modules config/settings.php
@@ -49,7 +49,7 @@ class Settings extends RedisTemplate implements RedisInterface
         return array_filter($this->data);
     }
 
-    /*
+    /**
     * Redis settings exist in two different states
     * These are the organization settings configured
     * By the user from within the application
@@ -76,7 +76,7 @@ class Settings extends RedisTemplate implements RedisInterface
         return new $class();
     }
 
-    /*
+    /**
      * Set the default configurations/organization settings given general settings data
      */
     public function setDefaultConfigurations($data)

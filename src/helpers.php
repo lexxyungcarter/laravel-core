@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use AceLords\Core\Repositories\RedisRepository;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 if (! function_exists('adjustBrightness'))
 {
@@ -29,7 +31,6 @@ if (! function_exists('adjustBrightness'))
     }
 }
 
-
 if (! function_exists('core_paginate'))
 {
     /**
@@ -41,7 +42,9 @@ if (! function_exists('core_paginate'))
      * 'm' => 25,
      * 'l' => 50,
      * 'xl' => 100,
-     * 'p' => 7
+     * 'p' => 7,
+     * 'xxl' => 500
+     * 'xxxl' => 1000
      *
      * @param string $entity
      * @return int $pagination
@@ -56,9 +59,8 @@ if (! function_exists('core_paginate'))
     }
 }
 
-if (!function_exists('dde'))
+if (! function_exists('dde'))
 {
-
     /**
      * add to the default dd()
      * to return 500 response code for ajax error detection
@@ -75,8 +77,7 @@ if (!function_exists('dde'))
     }
 }
 
-
-if(! function_exists('doe'))
+if (! function_exists('doe'))
 {
     /**
      * Returns the logged in user w.r.t. the request
@@ -92,8 +93,7 @@ if(! function_exists('doe'))
     }
 }
 
-
-if(! function_exists("eclair"))
+if (! function_exists("eclair"))
 {
     /**
      * Prepares a date for a more user ready format
@@ -114,9 +114,7 @@ if(! function_exists("eclair"))
     }
 }
 
-
-
-if(! function_exists('sanitizeDomainUrl'))
+if (! function_exists('sanitizeDomainUrl'))
 {
     /**
      * Sanitize URL
@@ -147,7 +145,7 @@ if(! function_exists('sanitizeDomainUrl'))
     }
 }
 
-if(! function_exists('_is_curl_installed'))
+if (! function_exists('_is_curl_installed'))
 {
     /**
      * check if curl is installed on the server
@@ -175,7 +173,6 @@ if (! function_exists('redis'))
     }
 }
 
-
 if (! function_exists('dd_blade_variables'))
 {
     /**
@@ -188,8 +185,7 @@ if (! function_exists('dd_blade_variables'))
     }
 }
 
-
-if(! function_exists('is_collection'))
+if (! function_exists('is_collection'))
 {
     /**
      * Check if a variable is a collection, similar to is_array()
@@ -203,7 +199,7 @@ if(! function_exists('is_collection'))
     }
 }
 
-if(! function_exists('is_serialized'))
+if (! function_exists('is_serialized'))
 {
     /**
      * check if is serialized or not.
@@ -238,7 +234,6 @@ if(! function_exists('is_serialized'))
     }
 }
 
-
 if (! function_exists('sanitizeBladeUrl'))
 {
     /**
@@ -268,8 +263,7 @@ if (! function_exists('sanitizeBladeUrl'))
     }
 }
 
-
-if(! function_exists("relativeUrl"))
+if (! function_exists("relativeUrl"))
 {
     /**
     * Formats an absolute url to a relative url; strip the root domain from the url
@@ -280,8 +274,7 @@ if(! function_exists("relativeUrl"))
     }
 }
 
-
-if (!function_exists('is_countable')) {
+if (! function_exists('is_countable')) {
     
     /**
      * a polyfill for the php 7.3 function
@@ -291,8 +284,8 @@ if (!function_exists('is_countable')) {
     }
 }
 
-if (!function_exists('filenameSanitizer')) {
-    
+if (! function_exists('filenameSanitizer')) 
+{    
     /** 
     * filename sanitizer
     *
@@ -317,7 +310,7 @@ if (!function_exists('filenameSanitizer')) {
     }
 }
 
-if(! function_exists('command_exists'))
+if (! function_exists('command_exists'))
 {
     /**
      * Check if an artisan command exists
@@ -332,8 +325,7 @@ if(! function_exists('command_exists'))
     }
 }
 
-
-if (!function_exists('setting'))
+if (! function_exists('setting'))
 {
     /**
      * Retrieve a setting configuration value.
@@ -347,5 +339,280 @@ if (!function_exists('setting'))
     function setting($setting, $default = null)
     {
         return redis()->get('configurations')->where('name', $setting)->first()->value ?? $default;
+    }
+}
+
+if (! function_exists('t_asset'))
+{
+    /**
+     * Get the assets for a template in the system
+     */
+    function t_asset($path = null)
+    {
+        $vars = explode('::', $path);
+    
+        // construct to templates/theme/path
+        return asset('templates/' . $vars[0] . '/' . $vars[1]);
+    }
+}
+
+if (! function_exists('instanceOfResource'))
+{
+    /**
+     * Check if data is an instance of resource, jsonResource, or resourceCollection
+     */
+    function instanceOfResource($data)
+    {
+        return $data instanceof ResourceCollection
+            || $data instanceof JsonResource;
+    }
+}
+
+if (! function_exists('authorize'))
+{
+    /**
+     * Check user authorization and throw error if false
+     *
+     * @param string|array $permissionOrRole
+     * @param bool $issaRole
+     */
+    function authorize($permissionOrRole, bool $issaRole = false)
+    {
+        $can = false;
+
+        if(doe()) {
+            $can = $issaRole ? doe()->hasRole($permissionOrRole) : doe()->can($permissionOrRole);
+        }
+
+        if(! $can) {
+            $handler = Config::get("laratrust.middleware.handlers.abort");
+            $defaultMessage = 'User does not have any of the necessary access rights.';
+
+            $message = "[CODE: " . $permissionOrRole . "]";
+            $message .= $handler['message'] ?? $defaultMessage;
+
+            return App::abort($handler['code'], $message);
+        }
+    }
+}
+
+if (! function_exists('deny'))
+{
+    /**
+     * custom abort code for non-authorized persons
+     *
+     * @param string|null $message
+     */
+    function deny(string $message = null)
+    {
+        $handler = Config::get("laratrust.middleware.handlers.abort");
+
+        $defaultMessage = 'User does not have any of the necessary access rights.';
+        return App::abort($handler['code'], $message ?? $handler['message'] ?? $defaultMessage);
+    }
+}
+
+if (! function_exists('getLogoDomainWise'))
+{
+    /**
+     * Get the logo domain-wise. If a sub-domain, get the logo on the first part
+     * 
+     * @return string $logoPath
+     */
+    function getLogoDomainWise()
+    {
+        $domain = explode(".", sanitizeDomainUrl());
+        array_pop($domain);
+        $domain = implode('-', $domain);
+        return "/logos/" . $domain . ".png";
+    }
+}
+
+if (! function_exists('__ta')) {
+    /**
+     * The acelords root template directory w.r.t. the theme root template directory.
+     *
+     * @param $template
+     *
+     * @param $useParent
+     *
+     * @return string
+     */
+    function __ta($template, $useParent = false)
+    {
+        return "/templates/$template/";
+    }
+}
+
+if (! function_exists('__m')) 
+{
+    /**
+     * Returns the mix-manifest.json file
+     *
+     * @param $template
+     * @param $useParent
+     *
+     * @return bool|string
+     */
+    function __m($template, $useParent)
+    {
+        $template_name = "mix-manifest.json";
+
+        // Force the Parent Manifest
+        if ($useParent and file_exists(__ta($template) . $template_name)) {
+            return __ta($template) . $template_name;
+        }
+
+        // Check the Child Manifest
+        if (file_exists(__ta($template) . $template_name)) {
+            return __ta($template) . $template_name;
+        }
+
+        // Check AceLords Manifest.
+        if (file_exists(__ta($template) . '/acelords/public/' . $template_name)) {
+            return __ta($template) . '/acelords/public/' . $template_name;
+        }
+
+        // Return to the Core Manifest.
+        if (file_exists(__ta($template) . '/' . $template_name)) {
+            return __ta($template) . '/' . $template_name;
+        }
+
+        return false;
+    }
+}
+
+if (! function_exists('__mix')) 
+{
+    /**
+     * @param $path
+     *
+     * @param bool $useParent
+     *
+     * @return string
+     */
+    function __mix($path, $useParent = false)
+    {
+        $arr = explode('::', $path);
+        $template = $arr[0];
+        $assetPath = $arr[1];
+
+        $pathWithOutSlash = ltrim($assetPath, '/');
+        $pathWithSlash    = '/' . ltrim($assetPath, '/');
+        $manifestFile     = __m($template, $useParent);
+
+        // No manifest file was found so return whatever was passed to mix().
+        if ( ! $manifestFile) {
+            return __ta($template, $useParent) . $pathWithOutSlash;
+        }
+
+        $manifestArray = json_decode(file_get_contents($manifestFile), true);
+
+        if (array_key_exists($pathWithSlash, $manifestArray)) {
+            return __ta($template, $useParent) . ltrim($manifestArray[$pathWithSlash], '/');
+        }
+
+        // No file was found in the manifest, return whatever was passed to mix().
+        return __ta($template, $useParent) . $pathWithOutSlash;
+    }
+}
+
+if (! function_exists('get_hours_and_days_count'))
+{
+    /**
+     * get number of hours and days given total hours
+     * 
+     * @param int $hours
+     */
+    function get_hours_and_days_count($hours)
+    {
+        $date1 = date_create(date('Y-m-d'));
+        $date2 = date_create(date('Y-m-d', strtotime('+' . $hours . ' hours')));
+        if($hours <= 48) {
+            return $hours . ' hours';
+        }
+
+        $no_of_days = date_diff($date1, $date2);
+        return $no_of_days->format('%a days');
+    }
+}
+
+if (! function_exists('get_gross_hours'))
+{
+    /**
+     * get the gross hours for a certain date
+     *
+     * @param $date
+     *
+     * @return float|int
+     */
+    function get_gross_hours($date)
+    {
+        $diff = $date->diff(now());
+        $hours = $diff->h;
+        $hours = $hours + ($diff->days*24);
+
+        if($diff->i > 30)
+            $hours++;
+
+        return $hours;
+    }
+}
+
+if (! function_exists('isDemo'))
+{
+    /**
+     * Check if app is in demo
+     */
+    function isDemo() : bool
+    {
+        return app()->environment() == "demo";
+    }
+}
+
+if (! function_exists('gravatar'))
+{
+    /**
+     * get profile picture from gravatar
+     */
+    function gravatar(string $name) : string
+    {
+        $gravatarId = md5(strtolower(trim($name)));
+
+        return 'https://gravatar.com/avatar/' . $gravatarId . '?s=240';
+    }
+}
+
+if (! function_exists('sizeForHumans'))
+{
+    /**
+     * get file sizes that are human readable
+     * @param $size // pass in kilobytes (like Laravel storage does)
+     */
+    function sizeForHumans($size) : string
+    {
+        // $bytes = $size;
+        // if ($bytes >= 1000000000) {
+        //     $bytes = number_format($bytes / 1000000000, 1) . 'GB';
+        // } elseif ($bytes >= 1000000) {
+        //     $bytes = number_format($bytes / 1000000, 1) . 'MB';
+        // } elseif ($bytes >= 1000) {
+        //     $bytes = number_format($bytes / 1000, 0) . 'KB';
+        // } elseif ($bytes > 1) {
+        //     $bytes = $bytes . ' bytes';
+        // } elseif ($bytes == 1) {
+        //     $bytes = $bytes . ' byte';
+        // } else {
+        //     $bytes = '0 bytes';
+        // }
+
+        $kiloBytes = $size;
+
+        if($kiloBytes < 1000)
+            return $kiloBytes . ' KB';
+        else if($kiloBytes < (1000 * 1000))
+            return number_format(($kiloBytes / 1000), 2) . ' MB';
+            
+        return number_format(($kiloBytes / (1000 * 1000)), 2) . ' GB';
     }
 }

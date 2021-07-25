@@ -2,9 +2,9 @@
 
 namespace AceLords\Core\Library;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use AceLords\Core\Repositories\RedisRepository;
+use Illuminate\Support\Carbon;
 
 class SiteConstants
 {

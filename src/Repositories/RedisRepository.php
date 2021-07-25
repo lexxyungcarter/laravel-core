@@ -5,7 +5,6 @@
  * User: Lexx YungCarter
  * Date: 2019-03-11
  * Time: 12:23
- * Project: yuvo
  */
 
 namespace AceLords\Core\Repositories;

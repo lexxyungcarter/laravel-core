@@ -7,7 +7,7 @@ use AceLords\Core\Library\Contracts\RedisInterface;
 class Models extends RedisTemplate implements RedisInterface
 {
 
-    /*
+    /**
      * Set the keys as they are to be returned to redis
      */
     public function setKeys()
@@ -15,7 +15,7 @@ class Models extends RedisTemplate implements RedisInterface
         $this->keys = config('acelords_redis.models');
     }
 
-    /*
+    /**
      * Returns selects data to the repository for redis storage
      */
     public function data($key = null)

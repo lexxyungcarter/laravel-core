@@ -13,7 +13,7 @@ abstract class RedisTemplate
 
     abstract public function setKeys();
 
-    /*
+    /**
      * Return keys as they are stored in redis
      */
     public function getKeys()
