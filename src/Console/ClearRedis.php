@@ -40,7 +40,11 @@ class ClearRedis extends Command
         // extras
         foreach(config('acelords_redis.extras') as $key)
         {
-            redis()->del($key);
+            if(is_array($key) {
+                redis()->del($key['table']);
+            } else {
+                redis()->del($key);
+            }
         }
 
         // models
